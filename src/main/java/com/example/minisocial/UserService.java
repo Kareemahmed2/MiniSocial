@@ -22,7 +22,7 @@ public class UserService {
         users.put(id, user);
     }
 
-    public void login(AuthRequest authRequest) {
+    public User login(AuthRequest authRequest) {
         String username = authRequest.getUsername();
         String password = authRequest.getPassword();
         User user = users.values().stream()
@@ -32,6 +32,7 @@ public class UserService {
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Incorrect password");
         }
+        return user;
     }
 
     public boolean emailExists(String email) {

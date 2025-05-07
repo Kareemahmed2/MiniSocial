@@ -49,7 +49,7 @@ public class HelloResource {
 
     @GET
     @Path("list")
-    @PermitAll
+    @RolesAllowed("admin")
     public List<User> list(@HeaderParam("Authorization") String token) {
         JwtUtil.validateToken(token);
         return userService.getAll();

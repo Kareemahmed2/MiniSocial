@@ -22,7 +22,7 @@ public class User implements Serializable {
     private String bio;
     @ManyToMany
     private List<User> friends;
-
+    private String role;
 
 
     public Long getId() {
