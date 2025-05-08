@@ -22,6 +22,10 @@ public class User implements Serializable {
     private String bio;
     @ManyToMany
     private List<User> friends;
+    @ManyToMany
+    private List<FriendRequest> friendRequests;
+    @ManyToMany
+    private List<Group> groups;
     private String role;
 
 

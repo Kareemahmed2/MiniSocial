@@ -1,34 +1,32 @@
-package com.example.minisocial;
+package com.example.minisocial.Services;
 
 import com.example.minisocial.Entities.AuthRequest;
 import com.example.minisocial.Entities.User;
+import com.example.minisocial.Repositories.UserRepo;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Stateless
 public class UserService {
-    private final Map<Long, User> users = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong();
+    @Inject
+    UserRepo userRepo;
+
 
     public void register(User user) {
-        if (emailExists(user.getEmail())) {
+        if (userRepo.emailExists(user.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }
-        long id = idGenerator.incrementAndGet();
-        user.setId(id);
-        users.put(id, user);
+        userRepo.save(user);
     }
 
     public User login(AuthRequest authRequest) {
         String username = authRequest.getUsername();
         String password = authRequest.getPassword();
-        User user = users.values().stream()
-                .filter(u -> u.getUsername().equals(username))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = userRepo.findUserByUsername(username);
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Incorrect password");
         }
@@ -36,14 +34,14 @@ public class UserService {
     }
 
     public boolean emailExists(String email) {
-        return users.values().stream().anyMatch(u -> u.getEmail().equals(email));
+        return userRepo.emailExists(email);
     }
 
-    public Optional<User> getById(Long id) {
-        return Optional.ofNullable(users.get(id));
+    public User getById(Long id) {
+        return userRepo.findUserById(id);
     }
 
     public List<User> getAll() {
-        return new ArrayList<>(users.values());
+        return userRepo.findAll();
     }
 }

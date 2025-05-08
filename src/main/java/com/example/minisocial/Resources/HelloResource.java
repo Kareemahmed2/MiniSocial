@@ -1,9 +1,9 @@
-package com.example.minisocial;
+package com.example.minisocial.Resources;
 
 import com.example.minisocial.Entities.AuthRequest;
 import com.example.minisocial.Entities.User;
+import com.example.minisocial.Services.UserService;
 import jakarta.annotation.security.PermitAll;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
