@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-source-infos>
+      <data-source-info id="975fa155-7f35-4a18-b399-32267032b9a1" persistence-unit-name="MiniSocialPU" />
+    </data-source-infos>
+  </component>
+</project>

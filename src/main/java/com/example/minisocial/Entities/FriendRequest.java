@@ -11,10 +11,10 @@ public class FriendRequest implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @ManyToOne
-    private User Sender;
-    @ManyToOne
-    private User receiver;
+
+    private String Sender;
+
+    private String receiver;
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
@@ -24,6 +24,30 @@ public class FriendRequest implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getSender() {
+        return Sender;
+    }
+
+    public void setSender(String sender) {
+        Sender = sender;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public RequestStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
     }
 
     public enum RequestStatus {

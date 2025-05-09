@@ -20,7 +20,7 @@ public class JwtUtil {
     }
 
     public static void validateToken(String token) throws JwtException {
-        if(token==null) return;
+        if(token==null) throw new JwtException("Token is invalid");
         if (token.startsWith("Bearer ")) {
             token = token.substring(7);
         }
@@ -29,5 +29,18 @@ public class JwtUtil {
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token);
+    }
+    public static String getUsername(String token) throws JwtException {
+        if(token==null) throw new JwtException("Token is invalid");
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+        token=token.trim();
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 }

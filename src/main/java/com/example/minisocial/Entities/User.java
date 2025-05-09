@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import javax.management.relation.Role;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,15 +21,19 @@ public class User implements Serializable {
     @Column(name="password")
     private String password;
     private String bio;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<User> friends;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<FriendRequest> friendRequests;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<Group> groups;
-    private String role;
 
 
+    public User() {
+        this.friends = new ArrayList<>();
+        this.friendRequests = new ArrayList<>();
+        this.groups = new ArrayList<>();
+    }
     public Long getId() {
         return id;
     }
@@ -77,5 +82,35 @@ public class User implements Serializable {
         this.friends = friends;
     }
 
+    public void addFriend(User friend) {
+        if (this.friends == null) {
+            this.friends = new ArrayList<>();
+        }
+        this.friends.add(friend);
+    }
 
+    public List<FriendRequest> getFriendRequests() {
+        return friendRequests;
+    }
+
+    public void setFriendRequests(List<FriendRequest> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
+    public void addFriendRequest(FriendRequest friendRequest) {
+        if (this.friendRequests == null) {
+            this.friendRequests = new ArrayList<>();
+        }
+        this.friendRequests.add(friendRequest);
+    }
+    public void removeFriendRequest(String sender) {
+        this.friendRequests.stream().filter(fr -> fr.getSender().equals(sender)).findFirst().ifPresent(this.friendRequests::remove);
+    }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
 }

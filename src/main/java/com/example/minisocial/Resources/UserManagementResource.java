@@ -16,7 +16,7 @@ import java.util.List;
 @Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class HelloResource {
+public class UserManagementResource {
     @Inject
     UserService userService;
 
@@ -50,9 +50,22 @@ public class HelloResource {
     @GET
     @Path("list")
     @PermitAll
-    public List<User> list(@HeaderParam("Authorization") String token) {
+    public Response list(@HeaderParam("Authorization") String token) {
         JwtUtil.validateToken(token);
-        return userService.getAll();
+        return Response.ok(userService.getAll()).build();
     }
 
+    @GET
+    @Path("requests")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFriendRequests(@HeaderParam("Authorization") String token) {
+        try {
+            JwtUtil.validateToken(token);
+            String username=JwtUtil.getUsername(token);
+            return Response.ok(userService.getFriendRequests(username)).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+        }
+    }
 }

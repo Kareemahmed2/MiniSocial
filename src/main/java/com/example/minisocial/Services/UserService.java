@@ -1,14 +1,15 @@
 package com.example.minisocial.Services;
 
 import com.example.minisocial.Entities.AuthRequest;
+import com.example.minisocial.Entities.FriendRequest;
 import com.example.minisocial.Entities.User;
+import com.example.minisocial.Entities.UserDTO;
 import com.example.minisocial.Repositories.UserRepo;
 import jakarta.ejb.Stateless;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Stateless
 public class UserService {
@@ -23,25 +24,24 @@ public class UserService {
         userRepo.save(user);
     }
 
-    public User login(AuthRequest authRequest) {
+    public void login(AuthRequest authRequest) {
         String username = authRequest.getUsername();
         String password = authRequest.getPassword();
         User user = userRepo.findUserByUsername(username);
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Incorrect password");
         }
-        return user;
     }
 
-    public boolean emailExists(String email) {
-        return userRepo.emailExists(email);
+    public List<FriendRequest> getFriendRequests(String username) {
+        return userRepo.getFriendRequests(username);
     }
 
-    public User getById(Long id) {
-        return userRepo.findUserById(id);
+
+    public List<UserDTO> getAll() {
+        return userRepo.findAll().stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
     }
 
-    public List<User> getAll() {
-        return userRepo.findAll();
-    }
 }

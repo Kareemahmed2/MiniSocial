@@ -23,11 +23,13 @@
       <artifactId>jakarta.jakartaee-api</artifactId>
       <version>9.1.0</version>
       <scope>provided</scope>
-    </dependency><dependency>
+    </dependency>
+      <dependency>
       <groupId>jakarta.mvc</groupId>
       <artifactId>jakarta.mvc-api</artifactId>
       <version>2.0.0</version>
-    </dependency><dependency>
+    </dependency>
+      <dependency>
       <groupId>jakarta.xml.ws</groupId>
       <artifactId>jakarta.xml.ws-api</artifactId>
       <version>3.0.1</version>
@@ -44,7 +46,8 @@
         <artifactId>junit-jupiter-engine</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
-      </dependency>  <dependency>
+      </dependency>
+      <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-api</artifactId>
       <version>0.11.5</version>
@@ -61,13 +64,20 @@
           <version>0.11.5</version>
           <scope>runtime</scope>
       </dependency>
+      <!-- Hibernate Core -->
       <dependency>
-          <groupId>org.postgresql</groupId>
-          <artifactId>postgresql</artifactId>
-          <version>42.7.5</version>
+          <groupId>org.hibernate.orm</groupId>
+          <artifactId>hibernate-core</artifactId>
+          <version>7.0.0.CR1</version>
+      </dependency>
+
+      <!-- H2 Database -->
+      <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <version>2.2.224</version> <!-- or a suitable version -->
       </dependency>
   </dependencies>
-
   <build>
     <plugins>
 <plugin>

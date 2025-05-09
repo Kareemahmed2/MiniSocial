@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseMigrationSettings" lastSelectedDirectory="..\..\AppData\Roaming\JetBrains\IntelliJIdea2023.3\consoles\db\975fa155-7f35-4a18-b399-32267032b9a1" />
+  <component name="PersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit name="MiniSocialPU" persistenceXmlPath="src/main/resources/META-INF/persistence.xml">
+        <packages>
+          <package value="com.example.minisocial.Entities" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>
