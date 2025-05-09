@@ -44,4 +44,18 @@ public class FriendsManagementResource {
             return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
         }
     }
+
+    @PUT
+    @Path("reject")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response declineFriendRequest(@HeaderParam("Authorization") String token, FriendRequestDTO friendRequest) {
+        try {
+            JwtUtil.validateToken(token);
+            String sender = JwtUtil.getUsername(token);
+            friendManagementService.rejectFriendRequest(friendRequest.getReceiver(), sender);
+            return Response.ok("Friend request rejected").build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+        }
+    }
 }

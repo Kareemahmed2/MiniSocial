@@ -38,8 +38,22 @@ public class FriendManagementService {
             throw new IllegalArgumentException("User not found");
         }
 
-        userRepo.addFriend(sender, receiver); // Also handles removing friend request
+        userRepo.addFriend(sender, receiver);
         userRepo.updateFriendRequestStatus(sender, receiver, FriendRequest.RequestStatus.ACCEPTED);
+    }
+
+    public void rejectFriendRequest(String sender, String receiver) {
+        if (!userRepo.isFriendRequestSent(sender, receiver)) {
+            throw new IllegalArgumentException("Friend request not sent");
+        }
+
+        User senderUser = userRepo.findUserByUsername(sender);
+        User receiverUser = userRepo.findUserByUsername(receiver);
+
+        if (senderUser == null || receiverUser == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+        userRepo.updateFriendRequestStatus(sender, receiver, FriendRequest.RequestStatus.REJECTED);
     }
 
 }
