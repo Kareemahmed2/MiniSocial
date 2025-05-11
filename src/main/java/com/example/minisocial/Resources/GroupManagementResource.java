@@ -1,9 +1,7 @@
 package com.example.minisocial.Resources;
 import com.example.minisocial.Entities.CreateGroupRequest;
 import com.example.minisocial.Entities.GroupActionRequest;
-import com.example.minisocial.Entities.PostRequest;
-import com.example.minisocial.Entities.User;
-import com.example.minisocial.Repositories.DataEngine;
+import com.example.minisocial.Entities.GroupPostRequest;
 import com.example.minisocial.Services.GroupManagementService;
 
 import jakarta.inject.Inject;
@@ -63,7 +61,7 @@ public class GroupManagementResource {
 
     @POST
     @Path("/post")
-    public Response postInGroup(@HeaderParam("Authorization")String token,PostRequest request) {
+    public Response postInGroup(@HeaderParam("Authorization")String token, GroupPostRequest request) {
         try {
             JwtUtil.validateToken(token);
             String username=JwtUtil.getUsername(token);

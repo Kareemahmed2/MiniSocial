@@ -56,7 +56,7 @@ public class GroupManagementService {
         }
     }
 
-    public void postInGroup(PostRequest request) {
+    public void postInGroup(GroupPostRequest request) {
         User author = dataEngine.findUserByUsername(request.authorUsername);
         Group group = dataEngine.findGroupByName(request.groupName);
 

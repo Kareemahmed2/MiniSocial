@@ -1,9 +1,8 @@
 package com.example.minisocial.Entities;
 
-public class PostRequest {
+public class PostUpdateRequest {
     private String content;
-    private String author;
-
+    private long postId;
 
     public String getContent() {
         return content;
@@ -13,11 +12,11 @@ public class PostRequest {
         this.content = content;
     }
 
-    public String getAuthor() {
-        return author;
+    public long getPostId() {
+        return postId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setPostId(long postId) {
+        this.postId = postId;
     }
 }

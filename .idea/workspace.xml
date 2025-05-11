@@ -10,20 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fcc6fe-a722-478b-9461-dd9066021637" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/CreateGroupRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupActionRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/PostRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/GroupManagementResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/GroupManagementService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/CommentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupPostRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/LikeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/PostDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/PostUpdateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/PostManagementResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/PostManagementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/DataEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/FriendManagementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/FriendManagementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/microprofile-config.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/PostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/PostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/DataEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/DataEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/GroupManagementResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/GroupManagementResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/GroupManagementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/GroupManagementService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +192,7 @@
       <workItem from="1746876097891" duration="292000" />
       <workItem from="1746887485628" duration="3166000" />
       <workItem from="1746962050672" duration="2000" />
-      <workItem from="1746985884771" duration="3163000" />
+      <workItem from="1746985884771" duration="11101000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit">
       <option name="closed" value="true" />
@@ -242,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746803405663</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Group Management V1 commit">
+      <option name="closed" value="true" />
+      <created>1746989168989</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746989168989</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,7 +262,8 @@
     <MESSAGE value="Data Repository and access commit" />
     <MESSAGE value="Friend Requests commit" />
     <MESSAGE value="Last friend management commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Last friend management commit" />
+    <MESSAGE value="Group Management V1 commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Group Management V1 commit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

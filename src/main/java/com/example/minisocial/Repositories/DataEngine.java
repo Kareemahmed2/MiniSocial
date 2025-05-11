@@ -24,6 +24,19 @@ public class DataEngine {
         User carol = createUser("carol", "1234", "carol@example.com");
         User dave = createUser("dave", "1234", "dave@example.com");
 
+        alice.addFriend(carol);
+        carol.addFriend(alice);
+
+        alice.addFriend(bob);
+        bob.addFriend(alice);
+
+        bob.addFriend(carol);
+        carol.addFriend(bob);
+
+        carol.addFriend(dave);
+        dave.addFriend(carol);
+
+
         em.persist(alice);
         em.persist(bob);
         em.persist(carol);
@@ -42,7 +55,46 @@ public class DataEngine {
         group.setAdmins(List.of(alice));
 
         em.persist(group);
+        Post post1 = new Post();
+        post1.setAuthor(alice);
+        post1.setContent("Enjoying the sunny weather today!");
+        post1.setMediaURL("https://example.com/media/sunny.jpg");
+        post1.setLikedBy(List.of(bob, carol));
+        post1.setComments(new ArrayList<>());
 
+        Comment comment1 = new Comment();
+        comment1.setAuthor(bob);
+        comment1.setContent("Looks amazing!");
+        comment1.setPost(post1);
+        post1.addComment(comment1);
+
+        Comment comment2 = new Comment();
+        comment2.setAuthor(carol);
+        comment2.setContent("Wish I was there.");
+        comment2.setPost(post1);
+        post1.addComment(comment2);
+
+        em.persist(post1);
+        em.persist(comment1);
+        em.persist(comment2);
+
+// --- Create a group post ---
+        GroupPost groupPost1 = new GroupPost();
+        groupPost1.setAuthor(bob);
+        groupPost1.setGroup(group);
+        groupPost1.setContent("Check out this trail I found!");
+        groupPost1.setMediaURL("https://example.com/media/trail.jpg");
+        groupPost1.setLikedBy(List.of(alice));
+        groupPost1.setComments(new ArrayList<>());
+
+        Comment groupComment1 = new Comment();
+        groupComment1.setAuthor(alice);
+        groupComment1.setContent("Nice find!");
+        groupComment1.setPost(groupPost1);
+        groupPost1.addComment(groupComment1);
+
+        em.persist(groupPost1);
+        em.persist(groupComment1);
     }
     public void save(User user) {
         em.persist(user);
@@ -140,14 +192,35 @@ public class DataEngine {
     public void updateGroup(Group group){
         em.merge(group);
     }
-    public void savePost(Post post) {
-        em.persist(post);
-    }
 
     public void saveGroupPost(GroupPost groupPost) {
         em.persist(groupPost);
     }
     public List<Group> findAllGroups() {
         return em.createQuery("SELECT g FROM Group g", Group.class).getResultList();
+    }
+    public void createPost(Post post) {
+        TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u WHERE u.username = :username", User.class);
+        query.setParameter("username", post.getAuthor());
+        post.setAuthor(
+                query.getResultStream()
+                        .findFirst()
+                        .orElseThrow(() -> new IllegalArgumentException("User not found"))
+        );
+        em.persist(post);
+    }
+    public List<Post> getPostsByUser(String username) {
+        return em.createQuery("SELECT p FROM Post p WHERE p.author.username = :username", Post.class)
+                .setParameter("username", username)
+                .getResultList();
+    }
+
+    public Post findPostById(Long postId) {
+        return em.find(Post.class, postId);
+    }
+
+    public void updatePost(Post post) {
+        em.merge(post);
     }
 }
