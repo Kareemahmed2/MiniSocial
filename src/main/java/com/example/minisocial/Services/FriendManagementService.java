@@ -2,7 +2,7 @@ package com.example.minisocial.Services;
 
 import com.example.minisocial.Entities.FriendRequest;
 import com.example.minisocial.Entities.User;
-import com.example.minisocial.Repositories.UserRepo;
+import com.example.minisocial.Repositories.DataEngine;
 import jakarta.ejb.Stateful;
 import jakarta.inject.Inject;
 
@@ -10,50 +10,50 @@ import jakarta.inject.Inject;
 public class FriendManagementService {
 
     @Inject
-    UserRepo userRepo;
+    DataEngine dataEngine;
 
     public void sendFriendRequest(String sender,String receiver) {
-        if(userRepo.isFriendRequestSent(sender,receiver)){
+        if(dataEngine.isFriendRequestSent(sender,receiver)){
             throw new IllegalArgumentException("Friend request already sent");
         }
         FriendRequest friendRequest = new FriendRequest();
-        friendRequest.setSender(userRepo.findUserByUsername(sender).getUsername());
-        friendRequest.setReceiver(userRepo.findUserByUsername(receiver).getUsername());
+        friendRequest.setSender(dataEngine.findUserByUsername(sender).getUsername());
+        friendRequest.setReceiver(dataEngine.findUserByUsername(receiver).getUsername());
         if (friendRequest.getSender() == null || friendRequest.getReceiver() == null) {
             throw new IllegalArgumentException("User not found");
         }
         friendRequest.setStatus(FriendRequest.RequestStatus.PENDING);
-        userRepo.sendFriendRequest(friendRequest);
+        dataEngine.sendFriendRequest(friendRequest);
     }
 
     public void acceptFriendRequest(String sender, String receiver) {
-        if (!userRepo.isFriendRequestSent(sender, receiver)) {
+        if (!dataEngine.isFriendRequestSent(sender, receiver)) {
             throw new IllegalArgumentException("Friend request not sent");
         }
 
-        User senderUser = userRepo.findUserByUsername(sender);
-        User receiverUser = userRepo.findUserByUsername(receiver);
+        User senderUser = dataEngine.findUserByUsername(sender);
+        User receiverUser = dataEngine.findUserByUsername(receiver);
 
         if (senderUser == null || receiverUser == null) {
             throw new IllegalArgumentException("User not found");
         }
 
-        userRepo.addFriend(sender, receiver);
-        userRepo.updateFriendRequestStatus(sender, receiver, FriendRequest.RequestStatus.ACCEPTED);
+        dataEngine.addFriend(sender, receiver);
+        dataEngine.updateFriendRequestStatus(sender, receiver, FriendRequest.RequestStatus.ACCEPTED);
     }
 
     public void rejectFriendRequest(String sender, String receiver) {
-        if (!userRepo.isFriendRequestSent(sender, receiver)) {
+        if (!dataEngine.isFriendRequestSent(sender, receiver)) {
             throw new IllegalArgumentException("Friend request not sent");
         }
 
-        User senderUser = userRepo.findUserByUsername(sender);
-        User receiverUser = userRepo.findUserByUsername(receiver);
+        User senderUser = dataEngine.findUserByUsername(sender);
+        User receiverUser = dataEngine.findUserByUsername(receiver);
 
         if (senderUser == null || receiverUser == null) {
             throw new IllegalArgumentException("User not found");
         }
-        userRepo.updateFriendRequestStatus(sender, receiver, FriendRequest.RequestStatus.REJECTED);
+        dataEngine.updateFriendRequestStatus(sender, receiver, FriendRequest.RequestStatus.REJECTED);
     }
 
 }

@@ -10,11 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fcc6fe-a722-478b-9461-dd9066021637" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/CreateGroupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupActionRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/PostRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/GroupManagementResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/GroupManagementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/UserRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/FriendsManagementResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/FriendsManagementResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/DataEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/FriendManagementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/FriendManagementService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/microprofile-config.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,36 +62,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JBoss/WildFly Server.JBoss/WildFly 29.0.5.Final-redhat-00001.executor": "Run",
-    "JPA.DatabaseSchemaImportDialog": "975fa155-7f35-4a18-b399-32267032b9a1",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/kokom/IdeaProjects/MiniSocial/src/main/java/com/example/minisocial/Entities/AuthRequest.java",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.1632184",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JBoss/WildFly Server.JBoss/WildFly 29.0.5.Final-redhat-00001.executor&quot;: &quot;Run&quot;,
+    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;975fa155-7f35-4a18-b399-32267032b9a1&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kokom/IdeaProjects/MiniSocial/src/main/java/com/example/minisocial/Entities/AuthRequest.java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.1632184&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite",
-      "h2"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;,
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.minisocial.Resources" />
@@ -179,7 +188,11 @@
       <workItem from="1746612592838" duration="6155000" />
       <workItem from="1746704442697" duration="13350000" />
       <workItem from="1746741036136" duration="4578000" />
-      <workItem from="1746794766709" duration="8159000" />
+      <workItem from="1746794766709" duration="13902000" />
+      <workItem from="1746876097891" duration="292000" />
+      <workItem from="1746887485628" duration="3166000" />
+      <workItem from="1746962050672" duration="2000" />
+      <workItem from="1746985884771" duration="3163000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit">
       <option name="closed" value="true" />
@@ -221,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746800115115</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Last friend management commit">
+      <option name="closed" value="true" />
+      <created>1746803405663</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746803405663</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,7 +253,8 @@
     <MESSAGE value="User Management temporary commit" />
     <MESSAGE value="Data Repository and access commit" />
     <MESSAGE value="Friend Requests commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Friend Requests commit" />
+    <MESSAGE value="Last friend management commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Last friend management commit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

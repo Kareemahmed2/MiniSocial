@@ -1,22 +1,58 @@
 package com.example.minisocial.Repositories;
 
-import com.example.minisocial.Entities.FriendRequest;
-import com.example.minisocial.Entities.User;
-import jakarta.ejb.Stateless;
+import com.example.minisocial.Entities.*;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.Singleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
-@Stateless
-public class UserRepo {
-
+@Singleton
+public class DataEngine {
     @PersistenceContext(unitName = "MiniSocialPU")
     private EntityManager em;
 
+    @PostConstruct
+    @Transactional
+    public void initDummyData() {
+
+        User alice = createUser("alice", "1234", "alice@example.com");
+        User bob = createUser("bob", "1234", "bob@example.com");
+        User carol = createUser("carol", "1234", "carol@example.com");
+        User dave = createUser("dave", "1234", "dave@example.com");
+
+        em.persist(alice);
+        em.persist(bob);
+        em.persist(carol);
+        em.persist(dave);
+
+        Group group = new Group();
+        group.setName("Nature Lovers");
+        group.setDescription("A group for people who love hiking and nature photography");
+        group.setPrivate(false);
+        group.setCreator(alice);
+
+        List<User> members = new ArrayList<>();
+        members.add(bob);
+        members.add(carol);
+        group.setMembers(members);
+        group.setAdmins(List.of(alice));
+
+        em.persist(group);
+
+    }
     public void save(User user) {
         em.persist(user);
+    }
+    public User createUser(String username, String password, String email) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        return user;
     }
 
     public User findUserByUsername(String username) {
@@ -88,5 +124,30 @@ public class UserRepo {
             em.merge(fr);
         });
     }
+    public void createGroup(Group group){
+        em.persist(group);
+    }
 
+   public Group findGroupByName(String name){
+        TypedQuery<Group> query = em.createQuery(
+                "SELECT g FROM Group g WHERE g.name = :name", Group.class);
+        return query.setParameter("name", name)
+                .getResultStream()
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Group not found"));
+    }
+
+    public void updateGroup(Group group){
+        em.merge(group);
+    }
+    public void savePost(Post post) {
+        em.persist(post);
+    }
+
+    public void saveGroupPost(GroupPost groupPost) {
+        em.persist(groupPost);
+    }
+    public List<Group> findAllGroups() {
+        return em.createQuery("SELECT g FROM Group g", Group.class).getResultList();
+    }
 }

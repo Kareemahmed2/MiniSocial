@@ -4,7 +4,7 @@ import com.example.minisocial.Entities.AuthRequest;
 import com.example.minisocial.Entities.FriendRequest;
 import com.example.minisocial.Entities.User;
 import com.example.minisocial.Entities.UserDTO;
-import com.example.minisocial.Repositories.UserRepo;
+import com.example.minisocial.Repositories.DataEngine;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
@@ -14,32 +14,32 @@ import java.util.stream.Collectors;
 @Stateless
 public class UserService {
     @Inject
-    UserRepo userRepo;
+    DataEngine dataEngine;
 
 
     public void register(User user) {
-        if (userRepo.emailExists(user.getEmail())) {
+        if (dataEngine.emailExists(user.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }
-        userRepo.save(user);
+        dataEngine.save(user);
     }
 
     public void login(AuthRequest authRequest) {
         String username = authRequest.getUsername();
         String password = authRequest.getPassword();
-        User user = userRepo.findUserByUsername(username);
+        User user = dataEngine.findUserByUsername(username);
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Incorrect password");
         }
     }
 
     public List<FriendRequest> getFriendRequests(String username) {
-        return userRepo.getFriendRequests(username);
+        return dataEngine.getFriendRequests(username);
     }
 
 
     public List<UserDTO> getAll() {
-        return userRepo.findAll().stream()
+        return dataEngine.findAll().stream()
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
