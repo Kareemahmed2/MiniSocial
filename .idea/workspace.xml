@@ -10,24 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fcc6fe-a722-478b-9461-dd9066021637" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/GroupManagementRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/Notification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/NotificationDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/NotificationEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/NotificationConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/NotificationProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Entities/UserDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/DataEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Repositories/DataEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/GroupManagementResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/GroupManagementResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/PostManagementResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/PostManagementResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/UserManagementResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Resources/UserManagementResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/FriendManagementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/FriendManagementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/GroupManagementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/GroupManagementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/PostManagementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/PostManagementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/PostService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/minisocial/Services/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -261,7 +250,7 @@
       <workItem from="1746887485628" duration="3166000" />
       <workItem from="1746962050672" duration="2000" />
       <workItem from="1746985884771" duration="16723000" />
-      <workItem from="1747050518191" duration="10755000" />
+      <workItem from="1747050518191" duration="17285000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit">
       <option name="closed" value="true" />
@@ -327,7 +316,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747006892880</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Notification module Commit">
+      <option name="closed" value="true" />
+      <created>1747061771555</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1747061771555</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +349,8 @@
     <MESSAGE value="Last friend management commit" />
     <MESSAGE value="Group Management V1 commit" />
     <MESSAGE value="Post management Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Post management Commit" />
+    <MESSAGE value="Notification module Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Notification module Commit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

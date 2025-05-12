@@ -235,4 +235,9 @@ public class DataEngine {
         user.addNotification(notification);
         em.merge(user);
     }
+    public List<User> searchUsersByNameOrEmail(String query) {
+        return em.createQuery("SELECT u FROM User u WHERE LOWER(u.username) LIKE :query OR LOWER(u.email) LIKE :query", User.class)
+                .setParameter("query", "%" + query.toLowerCase() + "%")
+                .getResultList();
+    }
 }

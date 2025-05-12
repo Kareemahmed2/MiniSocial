@@ -71,9 +71,36 @@ public class UserManagementResource {
     }
     @GET
     @Path("/notifications")
-    public List<NotificationDTO> getNotifications(@HeaderParam("Authorization")String token) {
-        JwtUtil.validateToken(token);
-        String username=JwtUtil.getUsername(token);
-        return userService.getNotifications(username);
+    public Response getNotifications(@HeaderParam("Authorization")String token) {
+        try {
+            JwtUtil.validateToken(token);
+            String username = JwtUtil.getUsername(token);
+            return Response.ok(userService.getNotifications(username)).build();
+        }catch (Exception e){
+            return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/search")
+    public Response searchUsers(@HeaderParam("Authorization")String token,@QueryParam("query") String query) {
+        try {
+            JwtUtil.validateToken(token);
+            return Response.ok(userService.searchUsers(query)).build();
+        }catch (Exception e){
+            return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/suggestions")
+    public Response suggestFriends(@HeaderParam("Authorization")String token) {
+        try {
+            JwtUtil.validateToken(token);
+            String username = JwtUtil.getUsername(token);
+            return Response.ok(userService.suggestFriends(username)).build();
+        }catch (Exception e){
+            return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
+        }
     }
 }

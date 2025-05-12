@@ -12,6 +12,8 @@ import java.util.List;
 public class PostManagementService {
     @Inject
     DataEngine dataEngine;
+    @Inject
+    NotificationProducer notificationProducer;
 
     public void createPost(PostRequest postRequest) {
         Post post=new Post();
@@ -85,6 +87,12 @@ public class PostManagementService {
         if(post.getLikedBy().contains(user)) {
             throw new IllegalArgumentException("Post already liked");
         };
+        NotificationEvent notificationEvent = new NotificationEvent();
+        notificationEvent.setAuthor(post.getAuthor().getUsername());
+        notificationEvent.setEventType("like");
+        notificationEvent.setMessage(user.getUsername() + " liked your post");
+        notificationEvent.setRecipient(post.getAuthor().getUsername());
+        notificationProducer.sendNotification(notificationEvent);
         post.addLike(user);
         dataEngine.updatePost(post);
     }
@@ -96,6 +104,12 @@ public class PostManagementService {
         comment.setContent(commentDTO.getContent());
         comment.setPost(post);
         post.addComment(comment);
+        NotificationEvent notificationEvent = new NotificationEvent();
+        notificationEvent.setAuthor(user.getUsername());
+        notificationEvent.setEventType("comment");
+        notificationEvent.setMessage(user.getUsername() + " commented on your post");
+        notificationEvent.setRecipient(post.getAuthor().getUsername());
+        notificationProducer.sendNotification(notificationEvent);
         dataEngine.updatePost(post);
     }
 }

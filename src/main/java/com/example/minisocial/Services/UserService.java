@@ -46,4 +46,27 @@ public class UserService {
                 .map(NotificationDTO::new)
                 .collect(Collectors.toList());
     }
+
+    public List<UserDTO> searchUsers(String query) {
+        return dataEngine.searchUsersByNameOrEmail(query).stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
+    }
+    public List<UserDTO> suggestFriends(String username) {
+        User user = dataEngine.findUserByUsername(username);
+        Set<User> suggestions = new HashSet<>();
+
+        for (User friend : user.getFriends()) {
+            for (User friendOfFriend : friend.getFriends()) {
+                if (!friendOfFriend.getUsername().equals(username) &&
+                        !user.getFriends().contains(friendOfFriend)) {
+                    suggestions.add(friendOfFriend);
+                }
+            }
+        }
+
+        return suggestions.stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
+    }
 }

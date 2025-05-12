@@ -86,25 +86,58 @@ public class GroupManagementResource {
     }
     @PUT
     @Path("/promote")
-    public void promoteMember(GroupManagementRequest request) {
-        groupService.promoteMember(request);
+    public Response promoteMember(@HeaderParam("Authorization")String token, GroupManagementRequest request) {
+        try {
+            JwtUtil.validateToken(token);
+            String username = JwtUtil.getUsername(token);
+            request.setAdmin(username);
+            groupService.promoteMember(request);
+            return Response.ok("Member promoted").build();
+        }catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Failed to promote member: " + e.getMessage()).build();
+        }
     }
 
     @PUT
     @Path("/remove-member")
-    public void removeMember(GroupManagementRequest request) {
-        groupService.removeMember(request);
+    public Response removeMember(@HeaderParam("Authorization")String token,GroupManagementRequest request) {
+      try {
+          JwtUtil.validateToken(token);
+          String username = JwtUtil.getUsername(token);
+          request.setAdmin(username);
+          groupService.removeMember(request);
+          return Response.ok("Member removed").build();
+      }catch (Exception e) {
+          return Response.status(Response.Status.BAD_REQUEST).entity("Failed to remove member: " + e.getMessage()).build();
+      }
     }
 
     @PUT
     @Path("/remove-post")
-    public void removePost(GroupManagementRequest request) {
-        groupService.removePost(request);
+    public Response removePost(@HeaderParam("Authorization")String token,GroupManagementRequest request) {
+        try {
+            JwtUtil.validateToken(token);
+            String username = JwtUtil.getUsername(token);
+            request.setAdmin(username);
+            groupService.removePost(request);
+            return Response.ok("Post removed").build();
+        }catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Failed to remove post: " + e.getMessage()).build();
+        }
     }
 
     @DELETE
     @Path("/delete")
-    public void deleteGroup(GroupManagementRequest request) {
-        groupService.deleteGroup(request);
+    public Response deleteGroup(@HeaderParam("Authorization")String token,GroupManagementRequest request) {
+        try {
+            JwtUtil.validateToken(token);
+            String username = JwtUtil.getUsername(token);
+            request.setAdmin(username);
+            groupService.deleteGroup(request);
+            return Response.ok("Group deleted").build();
+        }catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Failed to delete group: " + e.getMessage()).build();
+        }
     }
+
 }

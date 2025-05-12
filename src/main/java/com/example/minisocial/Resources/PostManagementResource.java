@@ -34,37 +34,52 @@ public class PostManagementResource {
     @GET
     @Path("/timeline")
     public Response getTimeline(@HeaderParam("Authorization")String token) {
-        JwtUtil.validateToken(token);
-        String username = JwtUtil.getUsername(token);
-        return Response.ok(service.getTimeline(username)).build();
+        try {
+            JwtUtil.validateToken(token);
+            String username = JwtUtil.getUsername(token);
+            return Response.ok(service.getTimeline(username)).build();
+        }catch (Exception e){
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 
     @PUT
     @Path("/edit")
     public Response editPost(@HeaderParam("Authorization")String token, PostUpdateRequest request) {
-        JwtUtil.validateToken(token);
-        String username=JwtUtil.getUsername(token);
-        service.editPost(username,request);
-        return Response.ok().build();
+        try {
+            JwtUtil.validateToken(token);
+            String username = JwtUtil.getUsername(token);
+            service.editPost(username, request);
+            return Response.ok("Post edited").build();
+        }catch (Exception e){
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 
     @POST
     @Path("/like")
     public Response likePost(@HeaderParam("Authorization")String token, LikeRequest request) {
-        JwtUtil.validateToken(token);
+        try{JwtUtil.validateToken(token);
         String username= JwtUtil.getUsername(token);
         request.setUsername(username);
         service.likePost(request);
-        return Response.ok().build();
+        return Response.ok("Post liked").build();
+        }catch (Exception e){
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 
     @POST
     @Path("/comment")
     public Response comment(@HeaderParam("Authorization")String token, CommentDTO request) {
-        JwtUtil.validateToken(token);
-        String username= JwtUtil.getUsername(token);
-        request.setAuthor(username);
-        service.commentOnPost(request);
-        return Response.ok().build();
+      try {
+          JwtUtil.validateToken(token);
+          String username = JwtUtil.getUsername(token);
+          request.setAuthor(username);
+          service.commentOnPost(request);
+          return Response.ok("Comment added").build();
+      }catch (Exception e){
+          return Response.status(Response.Status.UNAUTHORIZED).build();
+      }
     }
 }

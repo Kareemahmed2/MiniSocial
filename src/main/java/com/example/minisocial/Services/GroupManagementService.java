@@ -13,6 +13,8 @@ public class GroupManagementService {
 
     @Inject
     DataEngine dataEngine;
+    @Inject
+    NotificationProducer notificationProducer;
 
     public void createGroup(String owner,CreateGroupRequest request) {
         User creator = dataEngine.findUserByUsername(owner);
@@ -26,7 +28,6 @@ public class GroupManagementService {
         group.setName(request.getName());
         group.setDescription(request.getDescription());
         group.setMembers(users);
-        group.addMember(creator);
         group.setPrivate(request.getPrivate());
 
         dataEngine.createGroup(group);
@@ -93,6 +94,15 @@ public class GroupManagementService {
         if(!group.getAdmins().contains(promoterUser)) {
             throw new IllegalArgumentException(promoterUser + " is not an admin");
         }
+        if(group.getAdmins().contains(user)) {
+            throw new IllegalArgumentException(user + " is already an admin");
+        }
+        NotificationEvent notificationEvent = new NotificationEvent();
+        notificationEvent.setAuthor(request.getAdmin());
+        notificationEvent.setEventType("promote");
+        notificationEvent.setRecipient(request.getUsername());
+        notificationEvent.setMessage(user.getUsername() + " was promoted to admin in group "+ request.getGroupName() + " by " + request.getAdmin());
+        notificationProducer.sendNotification(notificationEvent);
         group.addAdmin(user);
         group.removeMember(user);
         dataEngine.updateGroup(group);
@@ -104,6 +114,12 @@ public class GroupManagementService {
         if(!group.getAdmins().contains(admin)) {
             throw new IllegalArgumentException(admin + " is not an admin");
         }
+        NotificationEvent notificationEvent = new NotificationEvent();
+        notificationEvent.setAuthor(request.getAdmin());
+        notificationEvent.setEventType("remove");
+        notificationEvent.setRecipient(request.getUsername());
+        notificationEvent.setMessage(user.getUsername() + " was removed from the group "+ request.getGroupName() + " by " + request.getAdmin());
+        notificationProducer.sendNotification(notificationEvent);
         group.removeMember(user);
         dataEngine.updateGroup(group);
     }
@@ -120,7 +136,7 @@ public class GroupManagementService {
     }
     public void deleteGroup(GroupManagementRequest request) {
         Group group = dataEngine.findGroupByName(request.getGroupName());
-        User admin = dataEngine.findUserByUsername(request.getUsername());
+        User admin = dataEngine.findUserByUsername(request.getAdmin());
         if(!group.getAdmins().contains(admin)) {
             throw new IllegalArgumentException(admin + " is not an admin");
         }
