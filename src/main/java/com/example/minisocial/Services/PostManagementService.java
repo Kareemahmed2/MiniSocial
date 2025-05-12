@@ -70,7 +70,10 @@ public class PostManagementService {
     }
 
 
-    public void editPost(PostUpdateRequest postUpdateRequest) {
+    public void editPost(String username,PostUpdateRequest postUpdateRequest) {
+        if(!dataEngine.findPostById(postUpdateRequest.getPostId()).getAuthor().getUsername().equals(username)) {
+            throw new IllegalArgumentException("You are not the author of this post");
+        }
         Post post = dataEngine.findPostById(postUpdateRequest.getPostId());
         post.setContent(postUpdateRequest.getContent());
         dataEngine.updatePost(post);

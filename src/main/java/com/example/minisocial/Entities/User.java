@@ -27,6 +27,8 @@ public class User implements Serializable {
     private List<FriendRequest> friendRequests;
     @ManyToMany(fetch=FetchType.EAGER)
     private List<Group> groups;
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications = new ArrayList<>();
 
 
     public User() {
@@ -112,5 +114,16 @@ public class User implements Serializable {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+    public void addNotification(Notification notification) {
+        this.notifications.add(notification);
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }

@@ -188,9 +188,16 @@ public class DataEngine {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
     }
+    public GroupPost findGroupPostById(Long postId) {
+        return em.find(GroupPost.class, postId);
+    }
 
     public void updateGroup(Group group){
         em.merge(group);
+    }
+
+    public void deleteGroup(Group group){
+        em.remove(group);
     }
 
     public void saveGroupPost(GroupPost groupPost) {
@@ -222,5 +229,10 @@ public class DataEngine {
 
     public void updatePost(Post post) {
         em.merge(post);
+    }
+    public void sendNotification(Notification notification) {
+        User user=notification.getRecipient();
+        user.addNotification(notification);
+        em.merge(user);
     }
 }

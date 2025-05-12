@@ -43,7 +43,8 @@ public class PostManagementResource {
     @Path("/edit")
     public Response editPost(@HeaderParam("Authorization")String token, PostUpdateRequest request) {
         JwtUtil.validateToken(token);
-        service.editPost(request);
+        String username=JwtUtil.getUsername(token);
+        service.editPost(username,request);
         return Response.ok().build();
     }
 

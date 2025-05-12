@@ -40,6 +40,9 @@ public class GroupManagementService {
             group.addMember(user);
             dataEngine.updateGroup(group);
         }
+        else{
+            throw new IllegalArgumentException("User already in group");
+        }
     }
 
     public void leaveGroup(GroupActionRequest request) {
@@ -81,6 +84,47 @@ public class GroupManagementService {
             dto.admins = group.getAdmins().stream().map(User::getUsername).collect(Collectors.toList());
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    public void promoteMember(GroupManagementRequest request) {
+        Group group = dataEngine.findGroupByName(request.getGroupName());
+        User user = dataEngine.findUserByUsername(request.getUsername());
+        User promoterUser = dataEngine.findUserByUsername(request.getAdmin());
+        if(!group.getAdmins().contains(promoterUser)) {
+            throw new IllegalArgumentException(promoterUser + " is not an admin");
+        }
+        group.addAdmin(user);
+        group.removeMember(user);
+        dataEngine.updateGroup(group);
+    }
+    public void removeMember(GroupManagementRequest request) {
+        Group group = dataEngine.findGroupByName(request.getGroupName());
+        User user = dataEngine.findUserByUsername(request.getUsername());
+        User admin = dataEngine.findUserByUsername(request.getAdmin());
+        if(!group.getAdmins().contains(admin)) {
+            throw new IllegalArgumentException(admin + " is not an admin");
+        }
+        group.removeMember(user);
+        dataEngine.updateGroup(group);
+    }
+
+    public void removePost(GroupManagementRequest request) {
+        Group group = dataEngine.findGroupByName(request.getGroupName());
+        User admin = dataEngine.findUserByUsername(request.getAdmin());
+        if(!group.getAdmins().contains(admin)) {
+            throw new IllegalArgumentException(admin + " is not an admin");
+        }
+        GroupPost post = dataEngine.findGroupPostById(request.getPostId());
+        group.removePost(post);
+        dataEngine.updateGroup(group);
+    }
+    public void deleteGroup(GroupManagementRequest request) {
+        Group group = dataEngine.findGroupByName(request.getGroupName());
+        User admin = dataEngine.findUserByUsername(request.getUsername());
+        if(!group.getAdmins().contains(admin)) {
+            throw new IllegalArgumentException(admin + " is not an admin");
+        }
+        dataEngine.deleteGroup(group);
     }
 }
 

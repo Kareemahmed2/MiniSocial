@@ -1,6 +1,7 @@
 package com.example.minisocial.Resources;
 import com.example.minisocial.Entities.CreateGroupRequest;
 import com.example.minisocial.Entities.GroupActionRequest;
+import com.example.minisocial.Entities.GroupManagementRequest;
 import com.example.minisocial.Entities.GroupPostRequest;
 import com.example.minisocial.Services.GroupManagementService;
 
@@ -82,5 +83,28 @@ public class GroupManagementResource {
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Failed to list groups: " + e.getMessage()).build();
         }
+    }
+    @PUT
+    @Path("/promote")
+    public void promoteMember(GroupManagementRequest request) {
+        groupService.promoteMember(request);
+    }
+
+    @PUT
+    @Path("/remove-member")
+    public void removeMember(GroupManagementRequest request) {
+        groupService.removeMember(request);
+    }
+
+    @PUT
+    @Path("/remove-post")
+    public void removePost(GroupManagementRequest request) {
+        groupService.removePost(request);
+    }
+
+    @DELETE
+    @Path("/delete")
+    public void deleteGroup(GroupManagementRequest request) {
+        groupService.deleteGroup(request);
     }
 }

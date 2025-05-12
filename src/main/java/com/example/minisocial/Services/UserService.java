@@ -1,9 +1,6 @@
 package com.example.minisocial.Services;
 
-import com.example.minisocial.Entities.AuthRequest;
-import com.example.minisocial.Entities.FriendRequest;
-import com.example.minisocial.Entities.User;
-import com.example.minisocial.Entities.UserDTO;
+import com.example.minisocial.Entities.*;
 import com.example.minisocial.Repositories.DataEngine;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
@@ -43,5 +40,10 @@ public class UserService {
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
-
+    public List<NotificationDTO> getNotifications(String username) {
+        User user = dataEngine.findUserByUsername(username);
+        return user.getNotifications().stream()
+                .map(NotificationDTO::new)
+                .collect(Collectors.toList());
+    }
 }

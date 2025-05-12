@@ -1,6 +1,7 @@
 package com.example.minisocial.Services;
 
 import com.example.minisocial.Entities.FriendRequest;
+import com.example.minisocial.Entities.NotificationEvent;
 import com.example.minisocial.Entities.User;
 import com.example.minisocial.Repositories.DataEngine;
 import jakarta.ejb.Stateful;
@@ -11,6 +12,8 @@ public class FriendManagementService {
 
     @Inject
     DataEngine dataEngine;
+    @Inject
+    NotificationProducer notificationProducer;
 
     public void sendFriendRequest(String sender,String receiver) {
         if(dataEngine.isFriendRequestSent(sender,receiver)){
@@ -24,6 +27,12 @@ public class FriendManagementService {
         }
         friendRequest.setStatus(FriendRequest.RequestStatus.PENDING);
         dataEngine.sendFriendRequest(friendRequest);
+        NotificationEvent event = new NotificationEvent();
+        event.setEventType("FRIEND_REQUEST_RECEIVED");
+        event.setAuthor(sender);
+        event.setRecipient(receiver);
+        event.setMessage(sender + " sent you a friend request");
+        notificationProducer.sendNotification(event);
     }
 
     public void acceptFriendRequest(String sender, String receiver) {

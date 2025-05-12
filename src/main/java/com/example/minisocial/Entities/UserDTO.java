@@ -7,15 +7,19 @@ import java.util.stream.Collectors;
 public class UserDTO implements Serializable {
     private Long id;
     private String username;
+    private String bio;
     private List<String> friends;
+    private List<String> groups;
     private List<FriendRequest> friendRequests;
     public UserDTO() {}
     public UserDTO(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
+        this.bio = user.getBio();
         this.friends = user.getFriends().stream()
                 .map(User::getUsername).collect(Collectors.toList());
         this.friendRequests = user.getFriendRequests();
+        this.groups = user.getGroups().stream().map(Group::getName).collect(Collectors.toList());
     }
 
     public Long getId() {

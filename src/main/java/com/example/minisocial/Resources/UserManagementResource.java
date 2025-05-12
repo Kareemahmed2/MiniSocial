@@ -1,6 +1,7 @@
 package com.example.minisocial.Resources;
 
 import com.example.minisocial.Entities.AuthRequest;
+import com.example.minisocial.Entities.NotificationDTO;
 import com.example.minisocial.Entities.User;
 import com.example.minisocial.Services.UserService;
 import jakarta.annotation.security.PermitAll;
@@ -67,5 +68,12 @@ public class UserManagementResource {
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
         }
+    }
+    @GET
+    @Path("/notifications")
+    public List<NotificationDTO> getNotifications(@HeaderParam("Authorization")String token) {
+        JwtUtil.validateToken(token);
+        String username=JwtUtil.getUsername(token);
+        return userService.getNotifications(username);
     }
 }
