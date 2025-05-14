@@ -25,7 +25,7 @@ public class JwtUtil {
             token = token.substring(7);
         }
         token=token.trim();
-        Jwts.parserBuilder()
+        Jwts.parser()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token);
@@ -36,7 +36,7 @@ public class JwtUtil {
             token = token.substring(7);
         }
         token=token.trim();
-        return Jwts.parserBuilder()
+        return Jwts.parser()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
